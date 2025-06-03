@@ -4,7 +4,7 @@ const About = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Header */}
         <h2 className="text-4xl font-bold text-white mb-8">
-          Hi, I'm <span className="text-indigo-500">Alec</span>
+          Hi, I&apos;m <span className="text-indigo-500">Alec</span>
         </h2>
 
         {/* Main Content */}
@@ -51,7 +51,7 @@ const About = () => {
               className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700
                        text-white font-medium rounded-lg transition-colors duration-300"
             >
-              Let's Work Together →
+              Let&apos;s Work Together →
             </a>
           </div>
         </div>

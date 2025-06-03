@@ -1,5 +1,15 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+
+declare global {
+  interface Window {
+    turnstile: {
+      render: (element: string | HTMLElement, options: any) => string;
+      reset: (widgetId?: string) => void;
+      remove: (widgetId?: string) => void;
+    };
+  }
+}
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,22 +20,88 @@ const Contact = () => {
   })
 
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  
+  const turnstileRef = useRef<HTMLDivElement>(null)
+  const widgetId = useRef<string>()
+
+  // Load Turnstile script
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
+    script.async = true
+    script.defer = true
+    script.onload = () => {
+      if (turnstileRef.current && window.turnstile) {
+        widgetId.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY, // You'll need to add this to your .env.local
+          callback: (token: string) => {
+            setTurnstileToken(token)
+          },
+          'error-callback': () => {
+            setError('Verification failed. Please try again.')
+          },
+          theme: 'dark', // Matches your dark theme
+        })
+      }
+    }
+    document.head.appendChild(script)
+
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script)
+      }
+    }
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    // Add your form submission logic here
-    // For now, let's just simulate a submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setLoading(false)
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    })
-    // You could add a success message here
+    setError('')
+    setSuccess(false)
+
+    if (!turnstileToken) {
+      setError('Please complete the verification challenge.')
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          turnstileToken
+        }),
+      })
+
+      if (response.ok) {
+        setSuccess(true)
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        })
+        // Reset Turnstile
+        if (window.turnstile && widgetId.current) {
+          window.turnstile.reset(widgetId.current)
+        }
+        setTurnstileToken('')
+      } else {
+        const errorData = await response.json()
+        setError(errorData.error || 'Failed to send message. Please try again.')
+      }
+    } catch (err) {
+      setError('Failed to send message. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -43,6 +119,22 @@ const Contact = () => {
           </div>
 
           <div className="max-w-3xl mx-auto">
+            {/* Success Message */}
+            {success && (
+              <div className="mb-8 p-4 bg-green-900/50 border border-green-500 rounded-lg">
+                <p className="text-green-300 text-center">
+                  Message sent successfully! I'll get back to you soon.
+                </p>
+              </div>
+            )}
+
+            {/* Error Message */}
+            {error && (
+              <div className="mb-8 p-4 bg-red-900/50 border border-red-500 rounded-lg">
+                <p className="text-red-300 text-center">{error}</p>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -56,8 +148,8 @@ const Contact = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 
-                             text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500
+                    className="mt-1 block w-full px-3 py-2 rounded-md bg-gray-800 border border-gray-700 
+                             text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500
                              transition-colors duration-200"
                   />
                 </div>
@@ -71,8 +163,8 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 
-                             text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500
+                    className="mt-1 block w-full px-3 py-2 rounded-md bg-gray-800 border border-gray-700 
+                             text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500
                              transition-colors duration-200"
                   />
                 </div>
@@ -89,8 +181,8 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   required
-                  className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 
-                           text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500
+                  className="mt-1 block w-full px-3 py-2 rounded-md bg-gray-800 border border-gray-700 
+                           text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500
                            transition-colors duration-200"
                 />
               </div>
@@ -106,22 +198,29 @@ const Contact = () => {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   required
-                  className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 
-                           text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500
+                  className="mt-1 block w-full px-3 py-2 rounded-md bg-gray-800 border border-gray-700 
+                           text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500
                            transition-colors duration-200"
                 />
+              </div>
+
+              {/* Turnstile */}
+              <div className="flex justify-center">
+                <div ref={turnstileRef}></div>
               </div>
 
               {/* Submit Button */}
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !turnstileToken}
                   className={`px-8 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600
                            text-white font-medium hover:from-blue-600 hover:to-indigo-700
                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
                            transform transition-all duration-200
-                           ${loading ? 'opacity-75 cursor-not-allowed' : 'hover:-translate-y-0.5'}`}
+                           ${loading || !turnstileToken 
+                             ? 'opacity-75 cursor-not-allowed' 
+                             : 'hover:-translate-y-0.5'}`}
                 >
                   {loading ? (
                     <span className="flex items-center">

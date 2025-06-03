@@ -16,50 +16,34 @@ const Projects = () => {
 
   const projects: Project[] = [
     {
-      title: "Netflix Clone",
-      description: "A streaming platform clone with user authentication and dynamic content loading. Features include video playback and user profiles.",
+      title: "FieldFlyt",
+      description: "FieldFlyt streamlines content collection for agencies through a form builder that creates custom templates matching WordPress structures. Agencies can design reusable content forms for clients, eliminating email chains and ensuring consistent data collection across projects.",
       image: "https://via.placeholder.com/600x400",
-      tags: ["React", "Node.js", "Tailwind"],
-      link: "https://github.com",
+      tags: ["React", "Node.js", "Tailwind", "Personal"],
+      link: "https://github.com/ajmcfarlin/FieldFlyt",
       preview: "https://demo.com"
     },
     {
-      title: "AI Image Generator",
+      title: "Real Estate Calculator",
       description: "Create unique images using OpenAI's DALL-E API. Users can generate and share AI-created artwork.",
       image: "https://via.placeholder.com/600x400",
-      tags: ["Next.js", "TypeScript", "Node.js"],
-      link: "https://github.com",
+      tags: ["Next.js", "TypeScript", "Node.js", "Personal"],
+      link: "https://github.com/ajmcfarlin/RealEstateCalculator",
       preview: "https://demo.com"
     },
     {
-      title: "E-Commerce Dashboard",
+      title: "Home Repair AI",
       description: "Full-featured admin dashboard for managing products, orders, and customer data with real-time analytics.",
       image: "https://via.placeholder.com/600x400",
-      tags: ["React", "TypeScript", "Tailwind"],
-      link: "https://github.com",
+      tags: ["React", "TypeScript", "Tailwind", "Personal"],
+      link: "https://github.com/ajmcfarlin/HomeRepairApp",
       preview: "https://demo.com"
     },
     {
-      title: "Real-time Chat App",
+      title: "Accu-Steel",
       description: "Instant messaging application with features like group chats, file sharing, and message encryption.",
       image: "https://via.placeholder.com/600x400",
-      tags: ["Next.js", "Node.js", "TypeScript"],
-      link: "https://github.com",
-      preview: "https://demo.com"
-    },
-    {
-      title: "Weather Dashboard",
-      description: "Interactive weather application with real-time updates, forecasting, and interactive maps.",
-      image: "https://via.placeholder.com/600x400",
-      tags: ["React", "TypeScript", "Tailwind"],
-      link: "https://github.com",
-      preview: "https://demo.com"
-    },
-    {
-      title: "Task Management Platform",
-      description: "Collaborative project management tool with features like Kanban boards, time tracking, and team chat.",
-      image: "https://via.placeholder.com/600x400",
-      tags: ["Next.js", "Node.js", "Tailwind"],
+      tags: ["React", "Node.js", "Professional"],
       link: "https://github.com",
       preview: "https://demo.com"
     }

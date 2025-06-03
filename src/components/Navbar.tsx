@@ -1,29 +1,39 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/contact', label: 'Contact' }
+    { href: '#about', label: 'About' },
+    { href: '#skills', label: 'Skills' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#contact', label: 'Contact' }
   ]
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const targetId = href.substring(1) // Remove the '#'
+    const targetElement = document.getElementById(targetId)
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+    
+    // Close mobile menu after clicking
+    setIsMobileMenuOpen(false)
+  }
+
   return (
-    <nav className="bg-gray-900 shadow-sm relative z-50"> {/* Added z-50 here */}
+    <nav className="bg-gray-900 shadow-sm relative z-50 sticky top-0"> {/* Made navbar sticky */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex items-center">
-            <Link 
-              href="/" 
-              className="text-xl font-bold transition-colors hover:text-blue-600"
-            >
-              Logo
-            </Link>
+            <span className="text-white font-bold text-xl">AM</span>
           </div>
 
           {/* Nav Links */}
@@ -40,14 +50,15 @@ export default function Navbar() {
             `}
           >
             {navLinks.map((link, i) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`
-                  block px-3 py-2 rounded-md text-white-700
+                  block px-3 py-2 rounded-md text-white
                   transition-all duration-300 ease-in-out
-                  hover:text-blue-600 hover:bg-gray-50
-                  transform sm:hover:scale-105
+                  hover:text-indigo-400 hover:bg-gray-800
+                  transform sm:hover:scale-105 cursor-pointer
                   ${isMobileMenuOpen 
                     ? 'translate-y-0 opacity-100' 
                     : 'translate-y-4 opacity-0 sm:translate-y-0 sm:opacity-100'
@@ -59,7 +70,7 @@ export default function Navbar() {
                 }}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
 
@@ -68,7 +79,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md 
-                         text-gray-700 hover:text-blue-600 hover:bg-gray-50
+                         text-white hover:text-indigo-400 hover:bg-gray-800
                          transition-colors duration-200"
             >
               <svg
