@@ -4,7 +4,12 @@ import React, { useState, useRef, useEffect } from 'react'
 declare global {
   interface Window {
     turnstile: {
-      render: (element: string | HTMLElement, options: any) => string;
+      render: (element: string | HTMLElement, options: {
+        sitekey: string;
+        callback: (token: string) => void;
+        'error-callback': () => void;
+        theme: string;
+      }) => string;
       reset: (widgetId?: string) => void;
       remove: (widgetId?: string) => void;
     };
@@ -36,7 +41,9 @@ const Contact = () => {
     script.onload = () => {
       if (turnstileRef.current && window.turnstile) {
         widgetId.current = window.turnstile.render(turnstileRef.current, {
-          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY, // You'll need to add this to your .env.local
+          sitekey: process.env.NODE_ENV === 'development' 
+            ? '1x00000000000000000000AA' 
+            : process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
           callback: (token: string) => {
             setTurnstileToken(token)
           },
@@ -97,7 +104,8 @@ const Contact = () => {
         const errorData = await response.json()
         setError(errorData.error || 'Failed to send message. Please try again.')
       }
-    } catch (err) {
+    } catch (error) {
+      console.error('Contact form error:', error)
       setError('Failed to send message. Please try again.')
     } finally {
       setLoading(false)
@@ -123,7 +131,7 @@ const Contact = () => {
             {success && (
               <div className="mb-8 p-4 bg-green-900/50 border border-green-500 rounded-lg">
                 <p className="text-green-300 text-center">
-                  Message sent successfully! I'll get back to you soon.
+                  Message sent successfully! I&apos;ll get back to you soon.
                 </p>
               </div>
             )}
