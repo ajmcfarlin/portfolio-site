@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="flex justify-between">
           {/* Brand Section */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-white">Alec McFarlin</h3>
@@ -28,44 +28,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-white transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="hover:text-white transition-colors">
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Services/Skills */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Services</h3>
-            <ul className="space-y-2">
-              <li className="hover:text-white transition-colors">Web Development</li>
-              <li className="hover:text-white transition-colors">UI/UX Design</li>
-              <li className="hover:text-white transition-colors">Mobile Apps</li>
-              <li className="hover:text-white transition-colors">Consulting</li>
-            </ul>
-          </div>
-
           {/* Contact Info */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
@@ -76,21 +38,15 @@ export default function Footer() {
                 </a>
               </li>
               <li>Des Moines, IA</li>
-              <li>Available for freelance</li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm">
+        <div className="border-t border-gray-800 mt-12 pt-8 items-center">
+          <p className="text-sm text-center">
             © {currentYear} Alec McFarlin. All rights reserved.
           </p>
-          <div className="mt-4 sm:mt-0 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <span className="mx-3">·</span>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-          </div>
         </div>
       </div>
     </footer>
