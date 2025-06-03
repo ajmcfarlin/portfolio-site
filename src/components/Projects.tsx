@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import Image from 'next/image'
 
 interface Project {
   title: string
@@ -88,12 +89,14 @@ const Projects = () => {
             {filteredProjects.map((project, index) => (
               <article key={index} className="group relative bg-gray-800 rounded-xl overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* Placeholder div instead of image */}
+                <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">🚀</div>
+                    <div className="text-gray-400 text-sm">Project Image</div>
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
                       <a href={project.preview} className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition-colors">
                         Live Demo
