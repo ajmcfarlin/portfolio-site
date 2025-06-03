@@ -1,3 +1,5 @@
+'use client'
+
 const About = () => {
   return (
     <section className="py-20 bg-gray-900">
@@ -29,7 +31,7 @@ const About = () => {
           {/* Personal Interests */}
           <div className="max-w-2xl mx-auto">
             <h3 className="text-xl font-semibold text-white mb-6">
-              When I'm not coding...
+              When I&apos;m not coding...
             </h3>
             <div className="flex flex-wrap justify-center gap-3">
               {['Travel ✈️', 'Reading 📚', 'Music 🎵', 'Coffee ☕'].map((hobby) => (
