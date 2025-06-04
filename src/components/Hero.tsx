@@ -4,10 +4,10 @@ export default function Hero() {
       {/* Enhanced grid overlay */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
       
-      {/* Multiple glows for more ambiance */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500 rounded-full opacity-[0.15] blur-[100px]"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full opacity-[0.15] blur-[100px]"></div>
-      <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-purple-500 rounded-full opacity-[0.1] blur-[100px]"></div>
+      {/* Multiple glows for more ambiance - Fixed with viewport constraints */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500 rounded-full opacity-[0.15] blur-[100px] max-w-[50vw] max-h-[50vh]"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full opacity-[0.15] blur-[100px] max-w-[50vw] max-h-[50vh]"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500 rounded-full opacity-[0.1] blur-[100px] max-w-[45vw] max-h-[45vh]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="pt-20 pb-24 text-center lg:pt-32 lg:pb-36 relative z-10">
