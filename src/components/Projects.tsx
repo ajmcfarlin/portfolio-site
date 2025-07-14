@@ -6,47 +6,43 @@ interface Project {
   description: string
   image: string
   tags: string[]
-  link: string
-  preview: string
+  link?: string
+  preview?: string
 }
 
 const Projects = () => {
-  const allTags = ['All', 'React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind']
+  const allTags = ['All', 'React', 'Next.js', 'TypeScript', 'Node.js', 'PHP']
   const [activeTag, setActiveTag] = useState('All')
 
   const projects: Project[] = [
     {
       title: "FieldFlyt",
       description: "FieldFlyt streamlines content collection for agencies through a form builder that creates custom templates matching WordPress structures. Agencies can design reusable content forms for clients, eliminating email chains and ensuring consistent data collection across projects.",
-      image: "https://via.placeholder.com/600x400",
+      image: "/fieldflyt.png",
       tags: ["React", "Node.js", "Tailwind", "Personal"],
-      link: "https://github.com/ajmcfarlin/FieldFlyt",
-      preview: "https://demo.com"
-    },
-    {
-      title: "Real Estate Calculator",
-      description: "Create unique images using OpenAI's DALL-E API. Users can generate and share AI-created artwork.",
-      image: "https://via.placeholder.com/600x400",
-      tags: ["Next.js", "TypeScript", "Node.js", "Personal"],
-      link: "https://github.com/ajmcfarlin/RealEstateCalculator",
-      preview: "https://demo.com"
-    },
-    {
-      title: "Home Repair AI",
-      description: "Full-featured admin dashboard for managing products, orders, and customer data with real-time analytics.",
-      image: "https://via.placeholder.com/600x400",
-      tags: ["React", "TypeScript", "Tailwind", "Personal"],
-      link: "https://github.com/ajmcfarlin/HomeRepairApp",
-      preview: "https://demo.com"
+      preview: "https://fieldflyt.alecjm.com"
     },
     {
       title: "Accu-Steel",
-      description: "Instant messaging application with features like group chats, file sharing, and message encryption.",
-      image: "https://via.placeholder.com/600x400",
+      description: "Custom estimate calculator for a commercial construction firm. Ported thousands of spreadsheet equations to JavaScript, creating a responsive dashboard that dealers can access on any device to generate and manage building estimates.",
+      image: "/accusteel.png",
       tags: ["React", "Node.js", "Professional"],
-      link: "https://github.com",
-      preview: "https://demo.com"
-    }
+      preview: "https://accusteel.com/"
+    },
+    {
+      title: "Vectair Systems",
+      description: "Custom WordPress theme with complex product templates and a custom plugin 'DropPress' that automatically syncs safety data sheets to product post type resources in 26 different languages.",
+      image: "/vectair.png",
+      tags: ["PHP", "JavaScript", "SCSS", "Professional"],
+      preview: "https://www.vectairsystems.com/"
+    },
+    {
+      title: "Cuttys of Okoboji",
+      description: "Custom WordPress theme with integrated membership and reservation system. Features complex business logic for reservation scheduling, automated billing, and comprehensive backend management for reservations.",
+      image: "/cuttys.png",
+      tags: ["PHP", "JavaScript", "SCSS", "Professional"],
+      preview: "https://www.cuttysofokoboji.org/"
+    },
   ]
 
   const filteredProjects = activeTag === 'All' 
@@ -88,23 +84,22 @@ const Projects = () => {
             {filteredProjects.map((project, index) => (
               <article key={index} className="group relative bg-gray-800 rounded-xl overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
-                {/* Placeholder div instead of image */}
-                <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">🚀</div>
-                    <div className="text-gray-400 text-sm">Project Image</div>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
-                      <a href={project.preview} className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition-colors">
-                        Live Demo
-                      </a>
-                      <a href={project.link} className="px-4 py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
-                        Source Code
-                      </a>
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                {(project.preview || project.link) && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-4 left-4 right-4 flex justify-center items-center">
+                      {project.preview && (
+                        <a href={project.preview} className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition-colors">
+                          View Project
+                        </a>
+                      )}
                     </div>
                   </div>
+                )}
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
