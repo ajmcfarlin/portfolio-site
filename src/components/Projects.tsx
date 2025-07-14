@@ -20,14 +20,14 @@ const Projects = () => {
       title: "FieldFlyt",
       description: "FieldFlyt streamlines content collection for agencies through a form builder that creates custom templates matching WordPress structures. Agencies can design reusable content forms for clients, eliminating email chains and ensuring consistent data collection across projects.",
       image: "/fieldflyt.png",
-      tags: ["React", "Node.js", "Tailwind", "Personal"],
+      tags: ["React", "Next.js", "Node.js", "Tailwind", "TypeScript", "Personal"],
       preview: "https://fieldflyt.alecjm.com"
     },
     {
       title: "Accu-Steel",
       description: "Custom estimate calculator for a commercial construction firm. Ported thousands of spreadsheet equations to JavaScript, creating a responsive dashboard that dealers can access on any device to generate and manage building estimates.",
       image: "/accusteel.png",
-      tags: ["React", "Node.js", "Professional"],
+      tags: ["React", "Node.js", "TypeScript", "Professional"],
       preview: "https://accusteel.com/"
     },
     {
