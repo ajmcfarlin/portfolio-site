@@ -12,14 +12,14 @@ const About = () => {
         {/* Main Content */}
         <div className="space-y-8">
           <p className="text-gray-400 text-lg leading-relaxed">
-            I'm a passionate full-stack developer who loves bringing ideas to life through code. 
+            I&apos;m a passionate full-stack developer who loves bringing ideas to life through code. 
             I thrive on solving complex problems and creating seamless user experiences that make a difference.
           </p>
           
           <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
             My journey in tech started with curiosity and has evolved into a deep passion for crafting 
             digital solutions. I believe in writing clean, maintainable code and staying current with 
-            emerging technologies. Whether it's building responsive frontends or architecting robust 
+            emerging technologies. Whether it&apos;s building responsive frontends or architecting robust 
             backends, I approach each challenge with enthusiasm and attention to detail.
           </p>
 
