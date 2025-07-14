@@ -17,11 +17,11 @@ const Skills = () => {
       description: "Creating robust server-side applications",
       skills: [
         { name: "Node.js", icon: "🟢", level: "Primary" },
-        { name: "Python", icon: "🐍", level: "Secondary" },
         { name: "PostgreSQL", icon: "🐘", level: "Primary" },
         { name: "MongoDB", icon: "🍃", level: "Secondary" },
         { name: "Express", icon: "⚡", level: "Primary" },
         { name: "REST APIs", icon: "🔌", level: "Primary" },
+        { name: "Prisma", icon: "🔺", level: "Secondary" },
       ]
     },
     {
@@ -30,10 +30,10 @@ const Skills = () => {
       skills: [
         { name: "Git", icon: "📚", level: "Primary" },
         { name: "Docker", icon: "🐳", level: "Secondary" },
-        { name: "AWS", icon: "☁️", level: "Secondary" },
+        { name: "Cloudflare", icon: "☁️", level: "Secondary" },
         { name: "VS Code", icon: "💻", level: "Primary" },
-        { name: "Terminal", icon: "⌨️", level: "Primary" },
-        { name: "Webpack", icon: "📦", level: "Secondary" },
+        { name: "DigitalOcean", icon: "🌊", level: "Secondary" },
+        { name: "Vercel", icon: "▲", level: "Secondary" },
       ]
     }
   ]
@@ -59,7 +59,7 @@ const Skills = () => {
               className="relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl blur-xl opacity-25 group-hover:opacity-75 transition-opacity duration-500"/>
-              <div className="relative bg-gray-800 rounded-xl p-8 hover:transform hover:scale-[1.01] transition-all duration-300">
+              <div className="relative bg-gray-800 rounded-xl p-8 hover:transform hover:scale-[1.01] transition-all duration-300 h-full">
                 <div className="text-xl font-semibold text-white mb-2">
                   {category.category}
                 </div>

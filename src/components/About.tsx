@@ -12,21 +12,16 @@ const About = () => {
         {/* Main Content */}
         <div className="space-y-8">
           <p className="text-gray-400 text-lg leading-relaxed">
-            A passionate full-stack developer with 5 years of experience building web applications.
-            I specialize in creating user-friendly interfaces and scalable backend solutions.
+            I'm a passionate full-stack developer who loves bringing ideas to life through code. 
+            I thrive on solving complex problems and creating seamless user experiences that make a difference.
           </p>
           
-          {/* Quick Stats */}
-          <div className="grid grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="p-6 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors duration-300">
-              <div className="text-4xl font-bold text-indigo-500 mb-2">5+</div>
-              <div className="text-sm text-gray-400">Years Experience</div>
-            </div>
-            <div className="p-6 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors duration-300">
-              <div className="text-4xl font-bold text-indigo-500 mb-2">50+</div>
-              <div className="text-sm text-gray-400">Projects Completed</div>
-            </div>
-          </div>
+          <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
+            My journey in tech started with curiosity and has evolved into a deep passion for crafting 
+            digital solutions. I believe in writing clean, maintainable code and staying current with 
+            emerging technologies. Whether it's building responsive frontends or architecting robust 
+            backends, I approach each challenge with enthusiasm and attention to detail.
+          </p>
 
           {/* Personal Interests */}
           <div className="max-w-2xl mx-auto">
